@@ -106,6 +106,15 @@ describe('updateIn', () => {
     );
   })
 
+  it('updates with no value present', () => {
+    var m = Map();
+    expect(
+      m.update('a', 'hello', x => x).toJS()
+    ).toEqual(
+       {a: 'hello'}
+    )
+  });
+
   it('creates new maps if path contains gaps', () => {
     var m = fromJS({a: {b: {c: 10}}});
     expect(

@@ -95,7 +95,7 @@ export class Map extends KeyedCollection {
       notSetValue,
       updater
     );
-    return updatedValue === NOT_SET ? undefined : updatedValue;
+    return updatedValue === NOT_SET ? this : updatedValue;
   }
 
   clear() {
@@ -783,7 +783,7 @@ function updateInDeepMap(existing, keyPathIter, notSetValue, updater) {
   if (step.done) {
     var existingValue = isNotSet ? notSetValue : existing;
     var newValue = updater(existingValue);
-    return newValue === existingValue ? existing : newValue;
+    return !isNotSet && newValue === existingValue ? existing : newValue;
   }
   invariant(
     isNotSet || (existing && existing.set),
